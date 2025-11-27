@@ -64,4 +64,16 @@ return function (RouteBuilder $routes): void
     {
         $routes->get('/', ['action' => 'index'], 'users.index');
     });
+
+    // $routes->resources('Products');
+
+    $routes->scope('/products',  ['controller' => 'Products'], function(RouteBuilder $routes)
+    {
+        $routes->get('/', ['action' => 'index'], 'products.index');
+        $routes->get('/create', ['action' => 'create'], 'products.create');
+        $routes->get('/{id}/edit', ['action' => 'edit'], 'products.edit')->setPass(['id']);
+
+        $routes->post('/store', ['action' => 'store'], 'products.store');
+        $routes->post('/update', ['action' => 'update'], 'products.update');
+    });
 };

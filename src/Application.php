@@ -16,6 +16,8 @@ declare(strict_types=1);
  */
 namespace App;
 
+use Aws\S3\S3Client;
+
 use Cake\Core\Configure;
 use Cake\Core\ContainerInterface;
 use Cake\Datasource\FactoryLocator;
@@ -61,16 +63,18 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
             // The bake plugin requires fallback table classes to work properly
             FactoryLocator::add('Table', (new TableLocator())->allowFallbackClass(false));
         }
+
+        $this->getContainer()->add(S3Client::class, function () 
+        {
+            $config = Configure::read('AWS');
+
+            return new S3Client([
+                'region'      => $config['region'],
+                'credentials' => $config['credentials'],
+                'version'     => 'latest',
+            ]);
+    });
     }
-
-    // public function initialize(): void
-    // {
-    //     parent::initialize();
-    //     $this->loadComponent('Flash');
-
-    //     // Add this line to check authentication result and lock your site
-    //     $this->loadComponent('Authentication.Authentication');
-    // }
 
     /**
      * Setup the middleware queue your application will use.

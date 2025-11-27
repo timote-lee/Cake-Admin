@@ -47,11 +47,20 @@
                 
                 <ul class="menu bg-base-200 min-h-full w-80 zp-4">
                     <li class="<?php if ($this->request->getParam('_matchedRoute') == '/dashboard'): ?> menu-active <?php endif; ?>">
-                        <a href="<?= $this->Url->build(['_name' => 'dashboard']) ?>">Dashboard</a>
+                        <a href="<?= $this->Url->build(['_name' => 'dashboard']) ?>">
+                            <i class="fas fa-fw fa-home"></i> Dashboard</a>
                     </li>
 
                     <li>
-                        <a href="<?= $this->Url->build(['_name' => 'users.index']) ?>">Users</a>
+                        <a href="<?= $this->Url->build(['_name' => 'users.index']) ?>">
+                            <i class="fas fa-fw fa-users"></i> Users
+                        </a>
+                    </li>
+
+                    <li>
+                        <a href="<?= $this->Url->build(['_name' => 'products.index']) ?>">
+                            <i class="fas fa-fw fa-boxes"></i> Products
+                        </a>
                     </li>
                 </ul>
             </div>
