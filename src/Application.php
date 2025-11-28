@@ -132,20 +132,11 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
     {
         $authenticationService = new AuthenticationService([
             'unauthenticatedRedirect' => Router::url('/'),
-            'queryParam' => 'redirect',
+            'queryParam'              => 'redirect',
         ]);
 
         // Load the authenticators, you want session first
         $authenticationService->loadAuthenticator('Authentication.Session');
-
-        $authenticationService->loadIdentifier('Authentication.Password', [
-            'fields' => ['username' => 'username', 'password' => 'password'],
-            'resolver' => [
-                'className' => 'Authentication.Orm',
-                'userModel' => 'Admins', // Specify the Admin model
-            ],
-            'alias' => 'AdminsIdentifier',
-        ]);
 
         // Configure form data check to pick email and password
         $authenticationService->loadAuthenticator('Authentication.Form', [
@@ -154,7 +145,18 @@ class Application extends BaseApplication implements AuthenticationServiceProvid
                 'password' => 'password',
             ],
             'loginUrl' => Router::url('/login'),
-            'identityFinder' => 'AdminsIdentifier', 
+            'identifier' => [
+                'Authentication.Password' => [
+                    'fields' => [
+                        'username' => 'username',
+                        'password' => 'password',
+                    ],
+                    'resolver' => [
+                        'className' => 'Authentication.Orm',
+                        'userModel' => 'Admins',
+                    ]
+                ]
+            ]
         ]);
 
         return $authenticationService;

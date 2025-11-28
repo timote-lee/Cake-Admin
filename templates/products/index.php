@@ -27,7 +27,7 @@
                 </thead>
 
                 <tbody>
-                <?php if ($products->isEmpty()): ?>
+                <?php if ($products->items()->isEmpty()): ?>
                     <tr class="text-center">
                         <td colspan="10">No record</td>
                     </tr>
