@@ -1,14 +1,13 @@
-
 <?php
 
 $this->Paginator->setTemplates([
-    'nextActive'   => '<button class="join-item btn btn-sm" rel="next" aria-label="Next">{{text}}</button>',
-    'nextDisabled' => '<button class="join-item btn btn-sm" disabled="disabled" aria-label="Next">{{text}}</button>',
-    'prevActive'   => '<button class="join-item btn btn-sm" rel="prev" aria-label="Previous">{{text}}</button>',
-    'prevDisabled' => '<button class="join-item btn btn-sm" disabled="disabled" aria-label="Previous">{{text}}</button>',
-    'number'       => '<button class="join-item btn btn-sm" aria-label="Page {{text}}">{{text}}</button>',
-    'current'      => '<button class="join-item btn btn-sm btn-active" aria-label="Current Page {{text}}">{{text}}</button>',
-    'ellipsis'     => '<button class="join-item btn btn-sm" disabled="disabled">...</button>',
+    'nextActive'   => '<a href="{{url}}" class="join-item btn btn-sm" rel="next" aria-label="Next">{{text}}</a>',
+    'nextDisabled' => '<a href="{{url}}" class="join-item btn btn-sm" disabled="disabled" aria-label="Next">{{text}}</a>',
+    'prevActive'   => '<a href="{{url}}" class="join-item btn btn-sm" rel="prev" aria-label="Previous">{{text}}</a>',
+    'prevDisabled' => '<a href="{{url}}" class="join-item btn btn-sm" disabled="disabled" aria-label="Previous">{{text}}</a>',
+    'number'       => '<a href="{{url}}" class="join-item btn btn-sm" aria-label="Page {{text}}">{{text}}</a>',
+    'current'      => '<a href="{{url}}" class="join-item btn btn-sm btn-active" aria-label="Current Page {{text}}">{{text}}</a>',
+    'ellipsis'     => '<a href="{{url}}" class="join-item btn btn-sm" disabled="disabled">...</a>',
 ]);
 
 ?>

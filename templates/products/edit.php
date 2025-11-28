@@ -13,22 +13,25 @@
                 </div>
             </div>
 
-            <label class="floating-label mb-8">
-                <input type="text" class="input input-lg w-full" name="title" value="<?= $product->title ?>">
+            <label class="floating-label mb-4">
+                <input type="text" class="input input-lg w-full" name="title" placeholder="Title" 
+                    value="<?= $product->title ?>">
                 <span>Title</span>
             </label>
 
-            <label class="floating-label mb-8">
-                <textarea class="textarea input-lg w-full h-24" name="description"><?= $product->description ?></textarea>
+            <label class="floating-label mb-4">
+                <textarea class="textarea input-lg w-full h-24" name="description" placeholder="Description"><?= $product->description ?></textarea>
                 <span>Description</span>
             </label>
 
-            <label class="floating-label mb-8">
-                <input type="number" class="input input-lg w-full" name="price" step="0.01" value="<?= $product->price ?>">
+            <label class="floating-label mb-4">
+                <!-- cant remove the currency, henc use substr instead -->
+                <input type="text" class="input input-lg w-full" name="price" placeholder="Price" 
+                    value="<?= substr($this->Number->currency($product->price / 1000), 1) ?>" step="0.01" >
                 <span>Price</span>
             </label>
 
-            <label class="mb-8">
+            <label class="mb-4">
                 <input type="file" class="file-input file-input-lg w-full" name="image" accept="images/*">
                 <div class="text-neutral text-sm mt-2">optional</div>
             </label>

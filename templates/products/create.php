@@ -13,22 +13,22 @@
                 </div>
             </div>
 
-            <label class="floating-label mb-8">
-                <input type="text" class="input input-lg w-full" name="title">
+            <label class="floating-label mb-4">
+                <input type="text" class="input input-lg w-full" name="title" placeholder="Title">
                 <span>Title</span>
             </label>
 
-            <label class="floating-label mb-8">
-                <textarea class="textarea input-lg w-full h-24" name="description"></textarea>
+            <label class="floating-label mb-4">
+                <textarea class="textarea input-lg w-full h-24" name="description" placeholder="Description"></textarea>
                 <span>Description</span>
             </label>
 
-            <label class="floating-label mb-8">
-                <input type="number" class="input input-lg w-full" name="price" step="0.01">
+            <label class="floating-label mb-4">
+                <input type="number" class="input input-lg w-full" name="price" placeholder="Price" step="0.01">
                 <span>Price</span>
             </label>
 
-            <label class="mb-8">
+            <label class="mb-4">
                 <input type="file" class="file-input file-input-lg w-full" name="image" accept="images/*">
             </label>
         </form>

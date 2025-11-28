@@ -57,7 +57,7 @@ class ProductsController extends AppController
 
         $file_name = $file->getClientFilename();
         $extension = substr($file_name, stripos($file_name, '.') + 1);  
-        $random    = bin2hex(random_bytes(15));
+        $random    = bin2hex(random_bytes(5));
         
         $s3_key = "{$random}.{$extension}"; 
 
@@ -97,7 +97,7 @@ class ProductsController extends AppController
                                 ]));
     }
 
-    public function update()
+    public function update(S3Client $s3Client)
     {
         $product = $this->Products->get($this->request->getData('id'));
         $product = $this->Products->patchEntity($product, $this->request->getData());
@@ -114,7 +114,38 @@ class ProductsController extends AppController
             }
         }
 
+        
+        // handle file upload to AWS
+        $file = $this->request->getData('image');
 
+        if ($file->getSize() > 0)
+        {
+            $file_name = $file->getClientFilename();
+            $extension = substr($file_name, stripos($file_name, '.') + 1);  
+            $random    = bin2hex(random_bytes(5));
+            
+            $s3_key = "{$random}.{$extension}"; 
+
+            try {
+                $result = $s3Client->putObject([
+                    'Bucket'     => 'cake-products-bucket',
+                    'Key'        => $s3_key,
+                    'SourceFile' => $file->getStream()->getMetadata('uri'),
+                    'ACL' => 'public-read'         
+                ]);
+
+                $product->image_url = $result['ObjectURL'];
+                
+            } catch (\Exception $e) 
+            {
+                return $this->response->withType('application/json')
+                                        ->withStringBody(json_encode([
+                                            'status'  => 'error',
+                                            'message' => $e->getMessage()
+                                        ]));
+            }
+        }
+        
         if (!$this->Products->save($product)) 
         {
             return $this->response->withType('application/json')

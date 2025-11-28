@@ -37,11 +37,11 @@
                         <td><?= $product->id ?></td>
                         <td>
                             <div class="flex items-center gap-3">
-                                <img src="<?= $product->image_url ?>" class="max-w-20 h-auto">
+                                <img src="<?= $product->image_url ?>" class="max-w-20 h-auto" alt="<?= $product->title ?>">
                                 <div class="font-medium"><?= $product->title ?></div>
                             </div>
                         </td>       
-                        <td>MYR <?= $product->price ?></td>
+                        <td><?= $this->Number->currency($product->price / 1000, 'MYR'); ?></td>
                         <td><?= $product->created ?></td>
                         <td>
                             <a href="<?= $this->Url->build(['_name' => 'products.edit', 'id' => $product->id]) ?>" class="btn btn-sm btn-primary">

@@ -12,17 +12,18 @@
     </head>
 
     <body class="min-h-screen bg-base-300">
-        <div class="drawer">
+        <div class="drawer lg:drawer-open">
             <input type="checkbox" id="drawer" class="drawer-toggle">
 
             <div class="drawer-content">
-                <div class="navbar bg-neutral text-neutral-content">
+                <!-- top menu -->
+                <div class="navbar bg-neutral text-neutral-content w-full">
                     <div class="flex-1">
-                        <label for="drawer" class="btn btn-square btn-ghost draw-button">
+                        <label for="drawer" class="btn btn-square btn-ghost draw-button lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" stroke-linejoin="round" stroke-linecap="round" stroke-width="2" fill="none" stroke="currentColor" class="my-1.5 inline-block size-4"><path d="M4 4m0 2a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2z"></path><path d="M9 4v16"></path><path d="M14 10l2 2l-2 2"></path></svg>
                         </label>
 
-                        <span class="font-bold align-middle">JY Store Portal</span>
+                        <span class="font-bold align-middle lg:px-3">JY Store Portal</span>
                     </div>
                         
                     <div class="flex-none">
@@ -37,6 +38,7 @@
                     </form>
                 </div>
 
+                <!-- main -->
                 <div class="p-5">
                     <?= $this->fetch('main') ?>
                 </div>
@@ -44,21 +46,23 @@
 
             <div class="drawer-side">
                 <label for="drawer" class="drawer-overlay" aria-label="close sidebar"></label>
-                
-                <ul class="menu bg-base-200 min-h-full w-80 zp-4">
-                    <li class="<?php if ($this->request->getParam('_matchedRoute') == '/dashboard'): ?> menu-active <?php endif; ?>">
-                        <a href="<?= $this->Url->build(['_name' => 'dashboard']) ?>">
-                            <i class="fas fa-fw fa-home"></i> Dashboard</a>
+
+                <!-- side menu -->
+                <ul class="menu bg-white min-h-full w-60 pt-10 px-4">
+                    <li class="<?php if (stripos($this->request->getParam('_matchedRoute'), 'dashboard') !== false): ?> menu-active <?php endif; ?>">
+                        <a href="<?= $this->Url->build(['_name' => 'dashboard']) ?>" class="py-3">
+                            <i class="fas fa-fw fa-home"></i> Dashboard
+                        </a>
                     </li>
 
-                    <li>
-                        <a href="<?= $this->Url->build(['_name' => 'users.index']) ?>">
+                    <li class="<?php if (stripos($this->request->getParam('_matchedRoute'), 'users') !== false): ?> menu-active <?php endif; ?>"">
+                        <a href="<?= $this->Url->build(['_name' => 'users.index']) ?>" class="py-3">
                             <i class="fas fa-fw fa-users"></i> Users
                         </a>
                     </li>
 
-                    <li>
-                        <a href="<?= $this->Url->build(['_name' => 'products.index']) ?>">
+                    <li class="<?php if (stripos($this->request->getParam('_matchedRoute'), 'products') !== false): ?> menu-active <?php endif; ?>">
+                        <a href="<?= $this->Url->build(['_name' => 'products.index']) ?>" class="py-3">
                             <i class="fas fa-fw fa-boxes"></i> Products
                         </a>
                     </li>
@@ -70,6 +74,8 @@
         <script src="//cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
         <script src="//code.jquery.com/jquery-3.7.1.min.js" integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
         <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        
+        <!-- custom JS-->
         <script src="<?= $this->Url->script('base.js'); ?>"></script>
         <script>
             $('#logout').click(function(e)

@@ -67,7 +67,7 @@ class ProductsTable extends Table
             ->notEmptyString('description');
 
         $validator
-            ->integer('price')
+            ->numeric('price')
             ->requirePresence('price', 'create')
             ->notEmptyString('price');
 
