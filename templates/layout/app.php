@@ -118,6 +118,7 @@
                 });
             });
         </script>
+        
         <?= $this->fetch('js') ?>
     </body>
 </html>

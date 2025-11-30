@@ -76,6 +76,5 @@ class PasswordHashCommand extends Command
         $hashed_password = $hasher->hash($password);
 
         $io->out('Hashed Password: ' . $hashed_password);
-
     }
 }
