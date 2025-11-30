@@ -97,6 +97,6 @@ class FollowUpUnregisteredUserCommand extends Command
             Log::write('debug', "Unregisted email sent to {$email}");
         }
 
-        $io->out(true);
+        Log::write('debug', __CLASS__);
     }
 }
