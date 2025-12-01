@@ -70,11 +70,14 @@ class FollowUpUnregisteredUserCommand extends Command
 
         // fetch distinct emails in email_verifications where used IS null (not in users table)
         $emails = $verificationsTable->find()
-                                        ->select(['email'])
-                                        ->distinct(['email'])
+                                        ->select([
+                                            'email', 
+                                            'count' => 'COUNT(CASE WHEN used IS NOT NULL THEN 1 ELSE NULL END)'
+                                        ])
+                                        ->groupBy('email')
+                                        ->having(['count' => 0])
                                         ->where([
                                             'DATE(EmailVerifications.created)' => date('Y-m-d', strtotime('-1 day')),
-                                            'EmailVerifications.used IS'       => null
                                         ])
                                         ->all()
                                         ->extract('email')
